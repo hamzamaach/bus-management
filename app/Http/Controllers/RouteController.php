@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreRouteRequest;
 use App\Http\Requests\UpdateRouteRequest;
 use App\Models\Route;
+use Carbon\Carbon;
 
 class RouteController extends Controller
 {
@@ -13,7 +14,20 @@ class RouteController extends Controller
      */
     public function index()
     {
-        //
+        $routes = Route::with([
+            'passengers' => function ($query) {
+                $query->whereDate('created_at', Carbon::today());
+            }
+        ])->withCount([
+                    'passengers' => function ($query) {
+                        $query->whereDate('created_at', Carbon::today());
+                    }
+                ])->get();
+        foreach ($routes as $route) {
+            $route->slots_left = $route->slots - $route->passengers_count;
+        }
+        // return $routes;
+        return view('index/main', compact('routes'));
     }
 
     /**
