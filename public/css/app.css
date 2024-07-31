@@ -1,0 +1,241 @@
+:root {
+    --primary-color: hsl(216, 99%, 49%);
+    --bg-color: #f2f2f2;
+    --bg-color-primary: #e8eaee;
+    --text-color: #333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    font-family: 'Roboto', sans-serif;
+}
+
+.routes {
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 50%;
+    margin: auto;
+}
+
+.route {
+    border: solid 1px var(--primary-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    cursor: pointer;
+    margin: 10px;
+    min-width: 200px;
+    min-height: 80px;
+    gap: 10px;
+    background-color: var(--bg-color-primary);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.route:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.time {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--primary-color);
+    padding: 0 20px 0 10px;
+    font-size: 1.3rem;
+    font-weight: 400;
+    border-right: solid 1px var(--primary-color);
+}
+
+.path {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 17px 0 10px;
+    border-right: solid 1px var(--primary-color);
+    position: relative;
+}
+
+.path .start,
+.path .end {
+    font-size: 1em;
+    font-weight: 700;
+    color: var(--text-color);
+    display: inline-block;
+}
+
+.path .start {
+    margin: 0 10px 0 0;
+}
+
+.path .end {
+    margin: 0 0 0 15px;
+}
+
+.path .left-line,
+.path .right-line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: var(--primary-color);
+    margin: 0 5px;
+    position: relative;
+}
+
+.path .right-line::after {
+    content: '\f061';
+    /* Font Awesome arrow-right */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    color: var(--primary-color);
+    position: absolute;
+    right: -10px;
+    /* Adjust as needed */
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.path .bus-icon {
+    font-size: 1.5em;
+    color: var(--primary-color);
+    margin: 0 5px;
+}
+
+.slots {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--primary-color);
+    padding-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 400;
+    margin-right: 10px;
+}
+
+.slots-nb {
+    font-size: 1rem;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 768px) {
+    .routes {
+        max-width: 95%;
+        gap: 6px;
+    }
+
+    .route {
+        gap: 5px;
+    }
+
+    .time {
+        font-size: 1em;
+        text-align: left;
+        margin-bottom: 5px;
+    }
+
+    .path {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    .path .start,
+    .path .end {
+        min-width: fit-content;
+        max-width: 70px;
+        font-size: 0.96em;
+        font-weight: 600;
+    }
+
+    .path .left-line,
+    .path .right-line {
+        margin: 5px 0;
+    }
+
+    .slots {
+        min-width: 80px;
+        text-align: left;
+        padding-left: 0;
+        font-size: 1em;
+    }
+
+    .slots {
+        font-weight: bold;
+        color: var(--primary-color);
+        padding-left: 5px;
+        font-size: 0.8rem;
+        font-weight: 400;
+        margin-right: 5px;
+    }
+
+    .slots-nb {
+        font-size: 0.8rem;
+        font-weight: 600;
+    }
+
+    .path .bus-icon {
+        font-size: 1.1rem;
+    }
+
+}
+
+@media (max-width: 480px) {
+    .routes {
+        max-width: 95%;
+        gap: 0px;
+    }
+
+    .route {
+        padding: 5px;
+    }
+
+    .time {
+        font-size: 1rem;
+        padding: 0 7px 0 5px;
+        font-weight: 400;
+        border-right: solid 1px var(--primary-color);
+    }
+
+
+    .path .start,
+    .path .end {
+        min-width: fit-content;
+        max-width: 50px;
+        font-size: 0.8em;
+        font-weight: 600;
+    }
+
+    .path .bus-icon {
+        font-size: 0.9rem;
+    }
+
+    .slots {
+        padding-left: 0px;
+        font-size: 0.9rem;
+        font-weight: 400;
+        margin-right: 0px;
+        min-width: 60px;
+    }
+
+
+    .slots-nb {
+        font-size: 1rem;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+}
