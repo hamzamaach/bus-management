@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Route;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,8 @@ class PassengerFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'route_id' => Route::factory(), // Create a related Route model
+            'role' => $this->faker->randomElement(['talent', 'staff', 'security']),
         ];
     }
 }
