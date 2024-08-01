@@ -1,7 +1,7 @@
 :root {
     --primary-color: hsl(216, 99%, 49%);
-    --bg-color: #f2f2f2;
-    --bg-color-primary: #e8eaee;
+    --bg-color: #F0F4F8;
+    --bg-color-primary: #FFFFFF;
     --text-color: #333;
 }
 
@@ -11,7 +11,7 @@
 }
 
 body {
-    background-color: var(--bg-color);
+    background-color: var(--bg-color) !important;
     font-family: 'Roboto', sans-serif;
 }
 
@@ -19,9 +19,9 @@ body {
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    /* gap: 10px; */
     max-width: 50%;
-    margin: auto;
+    margin: 65px auto 0;
 }
 
 .route {
@@ -73,6 +73,13 @@ body {
     color: var(--text-color);
     display: inline-block;
 }
+.zone-logo{
+
+}
+
+.zone-logo img{
+    width: 80px;
+}
 
 .path .start {
     margin: 0 10px 0 0;
@@ -81,25 +88,32 @@ body {
 .path .end {
     margin: 0 0 0 15px;
 }
+.bus-path{
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 15px;
+}
 
 .path .left-line,
-.path .right-line {
-    flex-grow: 1;
+.path .bus-line {
+    display: inline-block;
     height: 2px;
+    width: 100%;
     background-color: var(--primary-color);
     margin: 0 5px;
     position: relative;
 }
 
-.path .right-line::after {
+.path .bus-line::after {
     content: '\f061';
-    /* Font Awesome arrow-right */
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     color: var(--primary-color);
     position: absolute;
     right: -10px;
-    /* Adjust as needed */
     top: 50%;
     transform: translateY(-50%);
 }
@@ -151,6 +165,12 @@ body {
         width: 100%;
         margin-bottom: 5px;
     }
+    .bus-path{
+        width: 80%;
+        margin-bottom: 20px;
+        padding: 0 5px;
+    }
+    
 
     .path .start,
     .path .end {
@@ -161,7 +181,7 @@ body {
     }
 
     .path .left-line,
-    .path .right-line {
+    .path .bus-line {
         margin: 5px 0;
     }
 
