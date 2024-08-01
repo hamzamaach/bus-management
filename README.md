@@ -1,66 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Bus Routes Management System
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a bus routes management system built with Laravel. It allows users to view bus routes, see the list of passengers for each route, and add new passengers. The system prioritizes "staff" passengers, displaying them first in the list, and handles form submissions with AJAX.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Display bus routes with time, start and end points, and available slots.
+- View a list of passengers for each route, sorted with "staff" members first.
+- Add new passengers via a modal form.
+- Display success and error messages using Toastr notifications.
+- Hide the form to add new passengers when no slots are left.
+- Reload the page upon successful passenger addition.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+1. **Clone the repository:**
+    ```sh
+    git clone https://github.com/hamzamaach/bus-routes-management.git
+    cd bus-routes-management
+    ```
 
-## Learning Laravel
+2. **Install dependencies:**
+    ```sh
+    composer install
+    npm install
+    ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. **Set up the environment:**
+    Copy the `.env.example` file to `.env` and configure your database and other environment settings.
+    ```sh
+    cp .env.example .env
+    php artisan key:generate
+    ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+4. **Run migrations and seed the database (if applicable):**
+    ```sh
+    php artisan migrate --seed
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
+5. **Start the server:**
+    ```sh
+    php artisan serve
+    ```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## Usage
 
-### Premium Partners
+### Viewing Routes
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+On the main page, all bus routes are displayed with their time, start and end points, and the number of available slots.
+
+### Viewing Passengers
+
+Clicking on a route opens a modal displaying a table of passengers for that route. "Staff" members are highlighted and displayed first, with a label "Reserved by the staff".
+
+### Adding Passengers
+
+Inside the modal, there is a form to add new passengers. If no slots are left, the form is hidden. Upon submission, an AJAX request is sent to add the passenger. Success and error messages are displayed using Toastr notifications. The page reloads upon successful addition of a passenger.
+
+### Backend Logic
+
+The backend is implemented in Laravel, with routes and controllers handling the business logic:
+
+- **RouteController@index**: Fetches routes and passengers, prioritizes "staff" passengers, and calculates available slots.
+- **RouteController@store**: Handles the addition of new passengers and returns success or error messages.
+
+## File Structure
+
+- **app/Http/Controllers/RouteController.php**: Handles route-related logic.
+- **resources/views/index/main.blade.php**: Main view template displaying routes and the passenger modal.
+- **public/css/app.css**: Custom CSS.
+- **public/js/app.js**: Custom JavaScript handling AJAX and Toastr notifications.
+
+## Dependencies
+
+- Laravel
+- jQuery
+- Bootstrap
+- Font Awesome
+- Toastr
+
+## Acknowledgements
+
+- [Laravel](https://laravel.com/)
+- [jQuery](https://jquery.com/)
+- [Bootstrap](https://getbootstrap.com/)
+- [Toastr](https://github.com/CodeSeven/toastr)
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Contributions are welcome! Please open an issue or submit a pull request.
 
-## Code of Conduct
+## Contact
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+For questions or feedback, please contact [hamzamaach56@gmail.com].
