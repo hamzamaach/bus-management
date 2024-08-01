@@ -9,7 +9,7 @@ class Passenger extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ["label"];
 
     function Route()
     {
