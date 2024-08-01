@@ -19,7 +19,8 @@ class PassengerFactory extends Factory
     {
         return [
             'route_id' => Route::factory(), // Create a related Route model
-            'role' => $this->faker->randomElement(['talent', 'staff', 'security']),
+            'label' => $this->faker->userName(),
+            'role' => $this->faker->randomElement(['talent', 'staff', 'other']),
         ];
     }
 }
