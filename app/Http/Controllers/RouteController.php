@@ -14,21 +14,31 @@ class RouteController extends Controller
      */
     public function index()
     {
+
         $routes = Route::with([
             'passengers' => function ($query) {
-                $query->whereDate('created_at', Carbon::today());
+                $query->whereDate('created_at', Carbon::today())
+                    ->orderByRaw("CASE WHEN label = 'staff' THEN 0 ELSE 1 END, created_at");
             }
         ])->withCount([
                     'passengers' => function ($query) {
                         $query->whereDate('created_at', Carbon::today());
                     }
                 ])->get();
+
         foreach ($routes as $route) {
             $route->slots_left = $route->slots - $route->passengers_count;
+
+            $index = 1;
+            foreach ($route->passengers as $passenger) {
+                $passenger->index = $index++;
+            }
         }
+
         // return $routes;
         return view('index/main', compact('routes'));
     }
+
 
     /**
      * Show the form for creating a new resource.
