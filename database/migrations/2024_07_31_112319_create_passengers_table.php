@@ -18,7 +18,10 @@ return new class extends Migration
             $table->timestamps();
     
             // Define the foreign key constraint
-            $table->foreign('route_id')->references('id')->on('routes')->onDelete('cascade');
+            $table->foreign('route_id')
+            ->references('id')
+            ->on('routes')
+            ->onDelete('cascade');
         });
     }
 
