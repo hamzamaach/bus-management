@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('allowed_passengers', function (Blueprint $table) {
             $table->id();
-            $table->string('label');
+            $table->string('label')->unique();
             $table->timestamps();
         });
     }

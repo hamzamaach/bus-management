@@ -15,15 +15,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+
+        $this->call([
+            AllowedPassengersSeeder::class,
+            RouteSeeder::class,
+        ]);
 
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        Route::factory()
-            ->count(18)
-            ->has(Passenger::factory()->count(5))
-            ->create();
     }
 }
+
+// Route::factory()
+//     ->count(18)
+//     ->has(Passenger::factory()->count(5))
+//     ->create();
