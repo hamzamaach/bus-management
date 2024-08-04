@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('passengers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('route_id'); 
-            $table->string('label')->default('staff');
+            $table->string('label');
             $table->timestamps();
     
             // Define the foreign key constraint

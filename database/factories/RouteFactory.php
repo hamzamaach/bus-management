@@ -51,6 +51,7 @@ class RouteFactory extends Factory
             'end' => $route[1],
             'time' => $route[2],
             'slots' => 20,
+            'reserved' => random_int(0, 5),
         ];
     }
 }

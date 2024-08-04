@@ -84,7 +84,7 @@
             list.empty();
             passengers.forEach(function(passenger, index) {
                 var label = passenger.label;
-                var displayLabel = label === "staff" ? "reserved by the staff" : label;
+                var displayLabel = label === "staff" ? "Reserved by the staff" : label;
                 var rowClass = label === "staff" ? "table-warning" : "";
                 list.append('<tr class="' + rowClass + '"><td>#' + (index + 1) + '</td><td>' +
                     displayLabel + '</td></tr>');

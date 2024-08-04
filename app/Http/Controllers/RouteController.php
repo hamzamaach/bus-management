@@ -26,8 +26,7 @@ class RouteController extends Controller
         $routes = Route::whereBetween('time', [$start_time, $end_time])
             ->with([
                 'passengers' => function ($query) {
-                    $query->whereDate('created_at', Carbon::today())
-                        ->orderByRaw("CASE WHEN label = 'staff' THEN 0 ELSE 1 END, created_at");
+                    $query->whereDate('created_at', Carbon::today());
                 }
             ])->withCount([
                     'passengers' => function ($query) {
@@ -37,9 +36,18 @@ class RouteController extends Controller
 
         // Calculate slots left and add index to passengers
         foreach ($routes as $route) {
-            $route->slots_left = $route->slots - $route->passengers_count;
+            $route->slots_left = $route->slots - $route->passengers_count - $route->reserved;
 
-            $index = 1;
+
+            for ($i = 0; $i < $route->reserved; $i++) {
+                $newPassengers = collect([
+                    (object) ['label' => 'staff', 'index' => $i + 1],
+                ]);
+
+                $route->passengers = $newPassengers->merge($route->passengers);
+            }
+
+            $index = $route->reserved;
             foreach ($route->passengers as $passenger) {
                 $passenger->index = $index++;
             }
