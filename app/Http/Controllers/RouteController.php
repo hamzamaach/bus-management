@@ -12,20 +12,30 @@ class RouteController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
+        // Get the current time
+        $now = Carbon::now();
 
-        $routes = Route::with([
-            'passengers' => function ($query) {
-                $query->whereDate('created_at', Carbon::today())
-                    ->orderByRaw("CASE WHEN label = 'staff' THEN 0 ELSE 1 END, created_at");
-            }
-        ])->withCount([
+        // Define the 3-hour window
+        $start_time = $now->copy()->subHours(2);
+        $end_time = $now->copy()->addHours(3);
+
+        // Query routes within the 3-hour window
+        $routes = Route::whereBetween('time', [$start_time, $end_time])
+            ->with([
+                'passengers' => function ($query) {
+                    $query->whereDate('created_at', Carbon::today())
+                        ->orderByRaw("CASE WHEN label = 'staff' THEN 0 ELSE 1 END, created_at");
+                }
+            ])->withCount([
                     'passengers' => function ($query) {
                         $query->whereDate('created_at', Carbon::today());
                     }
                 ])->get();
 
+        // Calculate slots left and add index to passengers
         foreach ($routes as $route) {
             $route->slots_left = $route->slots - $route->passengers_count;
 
@@ -35,7 +45,7 @@ class RouteController extends Controller
             }
         }
 
-        // return $routes;
+        // Return the view with filtered routes
         return view('index/main', compact('routes'));
     }
 
