@@ -15,8 +15,8 @@ This project is a bus routes management system built with Laravel. It allows use
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/hamzamaach/bus-routes-management.git
-    cd bus-routes-management
+    git clone https://github.com/hamzamaach/bus-management.git
+    cd bus-management
     ```
 
 2. **Install dependencies:**
