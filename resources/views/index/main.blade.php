@@ -119,6 +119,9 @@
                             errorMessage += errors[error] + ' ';
                         }
                         toastr.error(errorMessage);
+                    } else if (xhr.status === 404) {
+                        toastr.error(`'${label}' doesn't exist !`);
+
                     } else {
                         toastr.error('Error adding passenger: ' + xhr.responseJSON.error);
                     }

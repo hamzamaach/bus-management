@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePassengerRequest;
 use App\Http\Requests\UpdatePassengerRequest;
+use App\Models\AllowedPassengers;
 use App\Models\Passenger;
 use App\Models\Route;
 use Illuminate\Http\Request;
@@ -37,9 +38,18 @@ class PassengerController extends Controller
         ]);
 
         try {
+
+            $label = $request->input('label');
+            // Check if the label exists in the allowed_passengers table
+            $labelExists = AllowedPassengers::where('label', $label)->exists();
+
+            if (!$labelExists) {
+                return response()->json(['error' => `'$label' doesn't exist !`], 404);
+            }
+
+            // Create the passenger if the label is allowed
             $passenger = $route->passengers()->create([
-                'role' => 'talent',
-                'label' => $request->input('label'),
+                'label' => $label,
             ]);
 
             return response()->json(['message' => 'Success', 'passenger' => $passenger], 200);
