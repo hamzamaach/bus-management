@@ -7,7 +7,9 @@ use App\Http\Requests\UpdatePassengerRequest;
 use App\Models\AllowedPassengers;
 use App\Models\Passenger;
 use App\Models\Route;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class PassengerController extends Controller
@@ -47,7 +49,19 @@ class PassengerController extends Controller
                 return response()->json(['error' => `'$label' doesn't exist !`], 404);
             }
 
-            // Create the passenger if the label is allowed
+            // Check if the passenger is already registered in another route with the same status and creation date
+            $passengerExists = DB::table('routes')
+                ->join('passengers', 'routes.id', '=', 'passengers.route_id')
+                ->where('passengers.label', $label)
+                ->where('routes.status', $route->status)
+                ->whereDate('passengers.created_at', Carbon::today())
+                ->exists();
+
+            if ($passengerExists) {
+                return response()->json(['error' => "'$label' already registered !"], 400);
+            }
+
+            // Create the passenger if the label is allowed and not already registered
             $passenger = $route->passengers()->create([
                 'label' => $label,
             ]);
@@ -60,6 +74,7 @@ class PassengerController extends Controller
             return response()->json(['error' => 'Internal Server Error'], 500);
         }
     }
+
 
     /**
      * Display the specified resource.

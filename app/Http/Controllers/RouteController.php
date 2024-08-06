@@ -19,8 +19,8 @@ class RouteController extends Controller
         $now = Carbon::now();
 
         // Define the 3-hour window
-        $start_time = $now->copy()->subHours(2);
-        $end_time = $now->copy()->addHours(3);
+        $start_time = $now->copy()->subHours(9);
+        $end_time = $now->copy()->addHours(4);
 
         // Query routes within the 3-hour window
         $routes = Route::whereBetween('time', [$start_time, $end_time])

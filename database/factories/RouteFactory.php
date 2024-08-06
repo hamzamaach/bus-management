@@ -52,6 +52,7 @@ class RouteFactory extends Factory
             'time' => $route[2],
             'slots' => 20,
             'reserved' => random_int(0, 5),
+            'status' => $route[0] === 'Campus' ? 'returning' : 'going',
         ];
     }
 }

@@ -122,11 +122,18 @@
                     } else if (xhr.status === 404) {
                         toastr.error(`'${label}' doesn't exist !`);
 
+                    } else if (xhr.status === 400) {
+                        toastr.error(`'${label}'  already registered !`);
+
                     } else {
-                        toastr.error('Error adding passenger: ' + xhr.responseJSON.error);
+                        toastr.error(xhr.responseJSON.error);
                     }
                 }
             });
+        });
+
+        $('#passengerModal').on('hidden.bs.modal', function() {
+            $('#passengerLabel').val('');
         });
     </script>
 </body>

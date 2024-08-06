@@ -11,7 +11,7 @@ class Passenger extends Model
 
     protected $fillable = ["label"];
 
-    function Route()
+    function route()
     {
         return $this->belongsTo(Route::class);
     }

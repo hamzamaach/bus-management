@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->string('start');
             $table->string('end');
             $table->time('time');
+            $table->enum('status', ['going', 'returning']);
             $table->integer('slots');
             $table->integer('reserved')->default(0);
             $table->timestamps();
