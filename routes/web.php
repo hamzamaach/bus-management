@@ -9,7 +9,7 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
-Route::get('/', [RouteController::class, 'index']);
+Route::get('/', [RouteController::class, 'index'])->name('home');
 Route::post('/routes/{route}/passengers', [PassengerController::class, 'store']);
 
 Route::get('/dashboard', function () {
