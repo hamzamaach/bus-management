@@ -1,8 +1,8 @@
 <div class="pos-f-t">
     <div class="collapse" id="navbarToggleExternalContent">
         <div class="bg-dark p-4">
-            <h4 class="text-white">Are you staff?</h4>
-            <a class="text-muted" href="{{route('login')}}">Login</a>
+            <h4 class="text-white">Collapsed content</h4>
+            <span class="text-muted">Toggleable via the navbar brand.</span>
         </div>
     </div>
     <nav class="navbar navbar-dark bg-dark fixed-top">
